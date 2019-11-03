@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1572775556 source:c:\users\jonas\desktop\projekty\github\image2ascii\image2ascii\main.cpp
+1572777065 source:c:\users\jonas\desktop\projekty\github\image2ascii\image2ascii\main.cpp
 	<iostream>
 	<fstream>
 	<SFML/Graphics.hpp>

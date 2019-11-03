@@ -2,31 +2,40 @@
 #include <fstream>
 #include <SFML/Graphics.hpp>
 
-void generateTextFile(sf::Image img);
+void generateTextFile(sf::Image img, std::string fileName);
 
 int main()
 {
     sf::Image image;
 
     std::cout<<"Name of file? (ex. img.png, make sure that the image is in the same folder with exe file)"<<std::endl;
-    std::string path;
-    std::cin>>path;
+    std::string path, name;
+    std::cin>>name;
+    path = name;
+    for(int i = 0; i<name.size(); i++)
+    {
+        if(name[i]=='.')
+        {
+            name.erase(name.begin()+i, name.end());
+            break;
+        }
+    }
 
     if(image.loadFromFile(path))
     {
         std::cout<<"Image loaded!"<<std::endl;
-        generateTextFile(image);
+        generateTextFile(image, name);
     }
     else std::cerr<<"Make sure that the file is in the same folder!"<<std::endl;
 
     return 0;
 }
 
-void generateTextFile(sf::Image img)
+void generateTextFile(sf::Image img, std::string fileName)
 {
     std::cout<<"...creating output file..."<<std::endl;
     std::ofstream off;
-    off.open("output.txt");
+    off.open(fileName+".txt");
 
     for(int i = 0; i<img.getSize().y; i++)
     {
