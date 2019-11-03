@@ -46,7 +46,7 @@ void generateTextFile(sf::Image img, std::string fileName)
             int blue = img.getPixel(j, i).b;
             int gray = (red+green+blue)/3;
 
-            if(gray<25) off<<"#";
+             if(gray<25) off<<"#";
             else if(gray<50) off<<"@";
             else if(gray<75) off<<"%";
             else if(gray<100) off<<"g";
@@ -56,6 +56,20 @@ void generateTextFile(sf::Image img, std::string fileName)
             else if(gray<200) off<<"o";
             else if(gray<225) off<<"-";
             else off<<" ";
+
+          /*  if(gray<20) off<<"#";
+            else if(gray<40) off<<"W";
+            else if(gray<60) off<<"@";
+            else if(gray<80) off<<"H";
+            else if(gray<100) off<<"&";
+            else if(gray<120) off<<"O";
+            else if(gray<140) off<<"=";
+            else if(gray<160) off<<"U";
+            else if(gray<180) off<<"o";
+            else if(gray<200) off<<"*";
+            else if(gray<220) off<<"-";
+            else if(gray<240) off<<"'";
+            else off<<" ";*/
 
         }
         off<<std::endl;
