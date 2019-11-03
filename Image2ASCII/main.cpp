@@ -2,7 +2,7 @@
 #include <fstream>
 #include <SFML/Graphics.hpp>
 
-void generateTextFile(sf::Image img, std::string fileName);
+void generateTextFile(sf::Image img, std::string fileName, bool reverseColors);
 
 int main()
 {
@@ -24,18 +24,28 @@ int main()
     if(image.loadFromFile(path))
     {
         std::cout<<"Image loaded!"<<std::endl;
-        generateTextFile(image, name);
+        bool isNegative = false;
+        std::cout<<"Do you want to reverse colors? (Y/N)"<<std::endl;
+        char ans;
+        std::cin>>ans;
+        while(ans!='Y'&&ans!='y'&&ans!='N'&&ans!='n')
+        {
+            std::cin>>ans;
+        }
+        if(ans=='Y'||ans=='y') isNegative = true;
+        generateTextFile(image, name, isNegative);
     }
     else std::cerr<<"Make sure that the file is in the same folder!"<<std::endl;
 
     return 0;
 }
 
-void generateTextFile(sf::Image img, std::string fileName)
+void generateTextFile(sf::Image img, std::string fileName, bool reverseColors)
 {
     std::cout<<"...creating output file..."<<std::endl;
     std::ofstream off;
-    off.open(fileName+".txt");
+    if(reverseColors) off.open(fileName+"(reversed colors).txt");
+    else off.open(fileName+".txt");
 
     for(int i = 0; i<img.getSize().y; i++)
     {
@@ -44,20 +54,11 @@ void generateTextFile(sf::Image img, std::string fileName)
             int red = img.getPixel(j, i).r;
             int green = img.getPixel(j, i).g;
             int blue = img.getPixel(j, i).b;
+
             int gray = (red+green+blue)/3;
+            if(reverseColors) gray = 255-gray;
 
-             if(gray<25) off<<"#";
-            else if(gray<50) off<<"@";
-            else if(gray<75) off<<"%";
-            else if(gray<100) off<<"g";
-            else if(gray<125) off<<"&";
-            else if(gray<150) off<<"x";
-            else if(gray<175) off<<"=";
-            else if(gray<200) off<<"o";
-            else if(gray<225) off<<"-";
-            else off<<" ";
-
-          /*  if(gray<20) off<<"#";
+            if(gray<20) off<<"#";
             else if(gray<40) off<<"W";
             else if(gray<60) off<<"@";
             else if(gray<80) off<<"H";
@@ -69,7 +70,7 @@ void generateTextFile(sf::Image img, std::string fileName)
             else if(gray<200) off<<"*";
             else if(gray<220) off<<"-";
             else if(gray<240) off<<"'";
-            else off<<" ";*/
+            else off<<" ";
 
         }
         off<<std::endl;
