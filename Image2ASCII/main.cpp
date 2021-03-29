@@ -37,6 +37,7 @@ int main()
     }
     else std::cerr<<"Make sure that the file is in the same folder!"<<std::endl;
 
+    getch();
     return 0;
 }
 

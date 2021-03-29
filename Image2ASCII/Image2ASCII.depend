@@ -413,3 +413,8 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
+1617006109 source:c:\users\jonas\desktop\git\image2ascii\image2ascii\main.cpp
+	<iostream>
+	<fstream>
+	<SFML/Graphics.hpp>
+
